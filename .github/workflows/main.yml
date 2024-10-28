@@ -21,7 +21,6 @@ jobs:
 
       - name: Build and Test with Maven
         run: mvn -f simple-api/pom.xml clean verify
-
       - name: Build test and analyze with SonarCloud
         run: |
           mvn -B verify sonar:sonar \
