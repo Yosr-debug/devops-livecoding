@@ -1,21 +1,25 @@
-name: CI devops 2024
+name: CI Workflow
+
 on:
-  #to begin you want to launch this job in main and develop
   push:
-    branches: #TODO
+    branches:
+      - main
   pull_request:
+    branches:
+      - main
 
 jobs:
-  test-backend:
-    runs-on: ubuntu-22.04
+  build-and-test:
+    runs-on: ubuntu-latest
     steps:
-      #checkout your github code using actions/checkout@v2.5.0
-      - uses: actions/checkout@v2.5.0
+      - name: Checkout Code
+        uses: actions/checkout@v2
 
-      #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
-      - name: Set up JDK 17
-        #TODO
+      - name: Set up Amazon Corretto JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'corretto'  # Utilise Amazon Corretto comme distribution
 
-      #finally build your app with the latest command
-      - name: Build and test with Maven
-        run: #TODO
+      - name: Build and Test with Maven
+        run: mvn -f simple-api/pom.xml clean verify
