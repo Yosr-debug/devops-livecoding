@@ -23,12 +23,12 @@ jobs:
         run: mvn -f simple-api/pom.xml clean verify
 
       - name: Build test and analyze with SonarCloud
-        run: mvn -B verify sonar:sonar
-          -Dsonar.projectKey=Yosr-debug_devops-livecoding #project key
-          -Dsonar.organization=yosr-debug
-          -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.login=${{ secrets.SONAR_TOKEN }} #token 
-          --file ./simple-api/pom.xml
+        run: |
+          mvn -B verify sonar:sonar \
+            -Dsonar.projectKey=Yosr-debug_devops-livecoding \
+            -Dsonar.organization=yosr-debug \
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
 
   build-and-push-docker-image:
     needs: build-and-test
