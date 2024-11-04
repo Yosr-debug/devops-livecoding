@@ -7,5 +7,4 @@
     networks:
       - name: my-network
 
-    state: started---
-# tasks file for roles/launch_proxy
+    state: started
